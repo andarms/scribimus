@@ -5,7 +5,9 @@ from core.models import TimeStampedModel
 
 class StoryCategory(models.Model):
     name = models.CharField(max_length=100, blank=False)
-    slug = models.SlugField(max_length=100)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Story(TimeStampedModel):

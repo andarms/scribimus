@@ -1,0 +1,11 @@
+<h1>Stories</h1>
+
+<a href="{% url 'story:create' %}">Create</a>
+<div>	
+{% for story in object_list %}
+    <h3>{{ story.name }}</h3>
+    <p>{{ story.description }}</p>
+{% empty %}
+    <p>No stories yet.</p>
+{% endfor %}
+</div>
