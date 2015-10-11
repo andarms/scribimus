@@ -1,4 +1,5 @@
 <h3>{{ story.name }}</h3>
+<p>Published on <small>{{ story.created }}</small></p>
 <p>{{ story.description }}</p>
 <p>category: 
 	<a href="{% url 'story:category' story.category.name %}">

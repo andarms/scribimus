@@ -1,0 +1,7 @@
+<form action="{% url 'login' %}?next={{ next_url }}" method="POST">
+	{% csrf_token %}
+	<input type="text" placeholder="Username" name="username">
+	<input type="password" placeholder="Password" name="password">
+	<p>{{errors}}</p>
+	<input type="submit" value="Login">
+</form>

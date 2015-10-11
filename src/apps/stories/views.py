@@ -4,6 +4,7 @@ from django.views.generic import CreateView, ListView, UpdateView,\
     DeleteView, DetailView
 
 
+from .mixins import LoginRequiredMixin
 from .models import Story, StoryCategory
 
 
@@ -19,21 +20,21 @@ class StoryDetailView(DetailView):
     model = Story
 
 
-class StoryCreateView(CreateView):
+class StoryCreateView(LoginRequiredMixin, CreateView):
     template_name = "stories/form.html"
     model = Story
     fields = ['name', 'description', 'category']
     success_url = reverse_lazy('story:list')
 
 
-class StoryUpdateView(UpdateView):
+class StoryUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "stories/form.html"
     model = Story
     fields = ['name', 'description', 'category']
     success_url = reverse_lazy('story:list')
 
 
-class StoryDeleteView(DeleteView):
+class StoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Story
     success_url = reverse_lazy('story:list')
 

@@ -18,5 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^story/', include('apps.stories.urls', namespace='story')),
+    url(r'^login/$', 'apps.menbers.views.login_view', name='login'),
+    url(r'^logout/$', 'apps.menbers.views.logout_view', name='logout'),
     url(r'^admin/', include(admin.site.urls)),
 ]
