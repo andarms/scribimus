@@ -1,3 +1,8 @@
 <h3>{{ story.name }}</h3>
 <p>{{ story.description }}</p>
+<p>category: 
+	<a href="{% url 'story:category' story.category.name %}">
+		{{ story.category.name }}
+	</a>
+</p>
 <a href="{% url 'story:edit' story.id %}">edit</a>

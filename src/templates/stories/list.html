@@ -5,8 +5,15 @@
 {% for story in stories %}
     <h3>{{ story.name }}</h3>
     <p>{{ story.description }}</p>
-    <a href="{% url 'story:detail' story.id %}">link</a>
-    <a href="{% url 'story:edit' story.id %}">edit</a>
+    <p>category: 
+		<a href="{% url 'story:category' story.category.name %}">
+			{{ story.category.name }}
+		</a>
+	</p>
+    <p>
+    	<a href="{% url 'story:detail' story.id %}">link</a>
+    	<a href="{% url 'story:edit' story.id %}">edit</a>
+    </p>
 {% empty %}
     <p>No stories yet.</p>
 {% endfor %}

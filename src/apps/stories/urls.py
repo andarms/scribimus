@@ -11,5 +11,10 @@ urlpatterns = [
         views.StoryDeleteView.as_view(),
         name='delete'
     ),
+    url(
+        r'^category/([\w-]+)/$',
+        views.StoryCategoryListView.as_view(),
+        name='category'
+    ),
     url(r'^(?P<pk>\d+)/$', views.StoryDetailView.as_view(), name='detail'),
 ]
