@@ -1,6 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.views.generic import CreateView
+
+
+from .forms import UserCreateForm
 
 
 def login_view(request):
@@ -29,3 +35,10 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+class MemberCreateView(CreateView):
+    model = User
+    template_name = 'members/form.html'
+    form_class = UserCreateForm
+    success_url = reverse_lazy('story:list')
