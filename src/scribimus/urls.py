@@ -17,9 +17,9 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^story/', include('apps.stories.urls', namespace='story')),
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^member/', include('apps.members.urls', namespace='member')),
+    url(r'^story/', include('apps.stories.urls', namespace='story')),
     url(r'^login/$', 'apps.members.views.login_view', name='login'),
     url(r'^logout/$', 'apps.members.views.logout_view', name='logout'),
-    url(r'^admin/', include(admin.site.urls)),
 ]

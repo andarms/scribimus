@@ -4,8 +4,8 @@ from django.views.generic import CreateView, ListView, UpdateView,\
     DeleteView, DetailView
 
 
-from .mixins import LoginRequiredMixin
 from .models import Story, StoryCategory
+from core.mixins import LoginRequiredMixin
 
 
 class StoryListView(ListView):
