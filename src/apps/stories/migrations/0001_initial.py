@@ -7,6 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('members', '0001_initial'),
     ]
 
     operations = [
@@ -16,8 +17,9 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('modified', models.DateTimeField(auto_now=True)),
-                ('name', models.CharField(max_length=200)),
+                ('title', models.CharField(max_length=200)),
                 ('description', models.TextField(default=b'')),
+                ('author', models.ForeignKey(to='members.Member')),
             ],
             options={
                 'ordering': ('-modified', '-created'),

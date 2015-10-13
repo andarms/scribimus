@@ -1,9 +1,9 @@
-<h3>{{ story.name }}</h3>
-<p>Published on <small>{{ story.created }}</small></p>
+<h3>{{ story.title }}</h3>
+<p>Published on {{ story.author }} <small>{{ story.created }}</small></p>
 <p>{{ story.description }}</p>
 <p>category: 
 	<a href="{% url 'story:category' story.category.name %}">
-		{{ story.category.name }}
+		{{ story.category }}
 	</a>
 </p>
 <a href="{% url 'story:edit' story.id %}">edit</a>

@@ -23,14 +23,21 @@ class StoryDetailView(DetailView):
 class StoryCreateView(LoginRequiredMixin, CreateView):
     template_name = "stories/form.html"
     model = Story
-    fields = ['name', 'description', 'category']
+    fields = ['title', 'description', 'category']
     success_url = reverse_lazy('story:list')
+
+    def get_form_kwargs(self):
+        kwargs = super(StoryCreateView, self).get_form_kwargs()
+        if 'data' in kwargs:
+            instance = Story(author=self.request.user.member)
+            kwargs.update({'instance': instance})
+        return kwargs
 
 
 class StoryUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "stories/form.html"
     model = Story
-    fields = ['name', 'description', 'category']
+    fields = ['title', 'description', 'category']
     success_url = reverse_lazy('story:list')
 
 

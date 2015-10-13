@@ -2,8 +2,8 @@
 <a href="{% url 'story:create' %}">Create</a>
 <div>	
 {% for story in stories %}
-    <h3>{{ story.name }}</h3>
-    <p>Published on <small>{{ story.created }}</small></p>
+    <h3>{{ story.title }}</h3>
+    <p>Published by {{ story.author }} on <small>{{ story.created }}</small></p>
     <p>{{ story.description }}</p>
     <p>category: 
 		<a href="{% url 'story:category' story.category.name %}">

@@ -8,6 +8,9 @@ class Member(models.Model):
     user = models.OneToOneField(User)
     description = models.TextField(default='')
 
+    def __str__(self):
+        return self.user.username
+
 
 @receiver(post_save, sender=User)
 def handle_user_save(sender, instance, created, **kwargs):
