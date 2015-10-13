@@ -1,13 +1,12 @@
-<h1>Stories</h1>
+<h2>{{user}} Stories</h2>
 <a href="{% url 'story:create' %}">Create</a>
 <div>	
 {% for story in stories %}
     <h3>{{ story.title }}</h3>
-    <p>Published by <a href="{% url 'member:detail' story.author %}">{{ story.author }}</a> 
-        on <small>{{ story.created }}</small></p>
+    <p>Published by {{ story.author }} on <small>{{ story.created }}</small></p>
     <p>{{ story.description }}</p>
     <p>category: 
-		<a href="{% url 'story:category' story.category %}">
+		<a href="{% url 'story:category' story.category.name %}">
 			{{ story.category.name }}
 		</a>
 	</p>
