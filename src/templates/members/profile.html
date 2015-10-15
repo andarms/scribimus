@@ -1,4 +1,7 @@
-<h2>{{user}} Stories</h2>
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ profile }} Stories</h2>
 <a href="{% url 'story:create' %}">Create</a>
 <div>	
 {% for story in stories %}
@@ -18,3 +21,4 @@
     <p>No stories yet.</p>
 {% endfor %}
 </div>
+{% endblock %}

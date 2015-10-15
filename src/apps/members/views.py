@@ -49,8 +49,9 @@ class MemberDetailView(DetailView):
     model = User
     slug_field = 'username'
     template_name = "members/profile.html"
+    context_object_name = "profile"
 
     def get_context_data(self, **kwargs):
         context = super(MemberDetailView, self).get_context_data(**kwargs)
-        context['stories'] = Story.objects.filter(author=context['user'].member)
+        context['stories'] = Story.objects.filter(author=context['profile'].member)
         return context

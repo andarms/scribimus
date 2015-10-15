@@ -1,8 +1,14 @@
-<form action="{% url 'login' %}?next={{ next_url }}" method="POST">
-	{% csrf_token %}
-	<input type="text" placeholder="Username" name="username">
-	<input type="password" placeholder="Password" name="password">
-	<p>{{errors}}</p>
-	<input type="submit" value="Login">
-</form>
-<p><a href="{% url 'member:create' %}">Create a account</a></p>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="center-block">
+	<form action="{% url 'login' %}?next={{ next_url }}" method="POST">
+		{% csrf_token %}
+		<input type="text" placeholder="Username" name="username">
+		<input type="password" placeholder="Password" name="password">
+		<p>{{errors}}</p>
+		<input type="submit" value="Login">
+	</form>
+	<p><a href="{% url 'member:create' %}" class="btn btn-primary">Create a account</a></p>
+</div>
+{% endblock %}

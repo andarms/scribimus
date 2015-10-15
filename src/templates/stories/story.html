@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h3>{{ story.title }}</h3>
 <p>Published on {{ story.author }} <small>{{ story.created }}</small></p>
 <p>{{ story.description }}</p>
@@ -7,3 +10,4 @@
 	</a>
 </p>
 <a href="{% url 'story:edit' story.id %}">edit</a>
+{% endblock %}

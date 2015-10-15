@@ -1,8 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>Stories</h1>
 <a href="{% url 'story:create' %}">Create</a>
 <div>	
 {% for story in stories %}
-    <h3>{{ story.title }}</h3>
+    <h3>
+        <a href="{% url 'story:detail' story.id %}">{{ story.title }}</a>
+    </h3>
     <p>Published by <a href="{% url 'member:detail' story.author %}">{{ story.author }}</a> 
         on <small>{{ story.created }}</small></p>
     <p>{{ story.description }}</p>
@@ -19,3 +24,4 @@
     <p>No stories yet.</p>
 {% endfor %}
 </div>
+{% endblock %}
