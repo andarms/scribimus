@@ -2,8 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import CreateView, ListView
+from django.shortcuts import render
+from django.views.generic import CreateView, DetailView
 
 
 from .forms import UserCreateForm
@@ -45,10 +45,12 @@ class MemberCreateView(CreateView):
     success_url = reverse_lazy('story:list')
 
 
-class MemberDetailView(ListView):
-    context_object_name = "stories"
+class MemberDetailView(DetailView):
+    model = User
+    slug_field = 'username'
     template_name = "members/profile.html"
 
-    def get_queryset(self):
-        self.author = get_object_or_404(User, username=self.args[0])
-        return Story.objects.filter(author=self.author.member)
+    def get_context_data(self, **kwargs):
+        context = super(MemberDetailView, self).get_context_data(**kwargs)
+        context['stories'] = Story.objects.filter(author=context['user'].member)
+        return context
