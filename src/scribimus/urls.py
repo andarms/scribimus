@@ -20,8 +20,8 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^member/', include('apps.members.urls', namespace='member')),
-    url(r'^story/', include('apps.stories.urls', namespace='story')),
+    url(r'^members/', include('apps.members.urls', namespace='members')),
+    url(r'^stories/', include('apps.stories.urls', namespace='stories')),
     url(r'^login/$', 'apps.members.views.login_view', name='login'),
     url(r'^logout/$', 'apps.members.views.logout_view', name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

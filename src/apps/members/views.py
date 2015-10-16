@@ -42,7 +42,7 @@ class MemberCreateView(CreateView):
     model = User
     template_name = 'members/form.html'
     form_class = UserCreateForm
-    success_url = reverse_lazy('story:list')
+    success_url = reverse_lazy('stories:list')
 
 
 class MemberDetailView(DetailView):

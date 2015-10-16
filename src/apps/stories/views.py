@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, ListView, UpdateView,\
-    DeleteView, DetailView
+    DeleteView, DetailView, TemplateView
 
 
 from .models import Story, StoryCategory
@@ -24,7 +24,7 @@ class StoryCreateView(LoginRequiredMixin, CreateView):
     template_name = "stories/form.html"
     model = Story
     fields = ['title', 'description', 'category']
-    success_url = reverse_lazy('story:list')
+    success_url = reverse_lazy('stories:list')
 
     def get_form_kwargs(self):
         kwargs = super(StoryCreateView, self).get_form_kwargs()
@@ -38,12 +38,12 @@ class StoryUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "stories/form.html"
     model = Story
     fields = ['title', 'description', 'category']
-    success_url = reverse_lazy('story:list')
+    success_url = reverse_lazy('stories:list')
 
 
 class StoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Story
-    success_url = reverse_lazy('story:list')
+    success_url = reverse_lazy('stories:list')
 
 
 class StoryCategoryListView(ListView):
@@ -53,3 +53,7 @@ class StoryCategoryListView(ListView):
     def get_queryset(self):
         self.category = get_object_or_404(StoryCategory, name=self.args[0])
         return Story.objects.filter(category=self.category)
+
+
+class ExploreView(TemplateView):
+    template_name = "stories/explore"

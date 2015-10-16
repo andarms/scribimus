@@ -2,20 +2,25 @@
 
 {% block content %}
 <h2>{{ profile }} Stories</h2>
-<a href="{% url 'story:create' %}">Create</a>
+<a href="{% url 'stories:create' %}">Create</a>
 <div>	
 {% for story in stories %}
-    <h3>{{ story.title }}</h3>
-    <p>Published by {{ story.author }} on <small>{{ story.created }}</small></p>
+    <h3>
+        <a href="{% url 'stories:detail' pk=story.id slug=story.title|slugify %}">
+            {{ story.title|slugify }}
+        </a>
+    </h3>
+    <p>Published by <a href="{% url 'members:detail' story.author %}">{{ story.author }}</a> 
+        on <small>{{ story.created }}</small></p>
     <p>{{ story.description }}</p>
     <p>category: 
-		<a href="{% url 'story:category' story.category.name %}">
+		<a href="{% url 'stories:category' story.category.name %}">
 			{{ story.category.name }}
 		</a>
 	</p>
     <p>
-    	<a href="{% url 'story:detail' story.id %}">link</a>
-    	<a href="{% url 'story:edit' story.id %}">edit</a>
+    	<a href="{% url 'stories:detail' pk=story.id slug=story.title|slugify %}">
+    	<a href="{% url 'stories:edit' story.id %}">edit</a>
     </p>
 {% empty %}
     <p>No stories yet.</p>

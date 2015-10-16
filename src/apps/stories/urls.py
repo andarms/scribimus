@@ -16,5 +16,14 @@ urlpatterns = [
         views.StoryCategoryListView.as_view(),
         name='category'
     ),
-    url(r'^(?P<pk>\d+)/$', views.StoryDetailView.as_view(), name='detail'),
+    url(
+        r'^explore/$',
+        views.ExploreView.as_view(),
+        name='explore'
+    ),
+    url(
+        r'^(?P<pk>\d+)-(?P<slug>[\w-]+)/$',
+        views.StoryDetailView.as_view(),
+        name='detail'
+    ),
 ]
