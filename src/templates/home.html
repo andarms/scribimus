@@ -1,3 +1,16 @@
-<h1>Scribimus</h1>
+{% extends 'base.html' %}
 
-<a href="{% url 'story:create' %}">Create</a>
+{% block landing %}
+<div class="layout-fill landing">
+  <h1 class="display-3">Scribimus</h1>
+  <p class="lead">The front page of the indie writers</p>
+  <hr class="m-y-md">
+  <p class="lead">
+    <a class="btn btn-primary-outline btn-lg" href="{% url 'members:create' %}" role="button">
+      Sign up
+    </a>
+    <span class="m-x">or</span>
+    <a class="btn btn-success-outline btn-lg" href="{% url 'login' %}" role="button">Login</a>
+  </p>
+</div>
+{% endblock %}
