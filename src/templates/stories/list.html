@@ -3,27 +3,36 @@
 {% block content %}
 <h1>Stories</h1>
 <a href="{% url 'stories:create' %}">Create</a>
-<div>	
+
+
+<div class="card-columns">
+    
 {% for story in stories %}
-    <h3>
+
+
+<div class="card">
+   <div class="card-block">
+    <h4 class="card-title">
         <a href="{% url 'stories:detail' pk=story.id slug=story.title|slugify %}">
             {{ story.title }}
         </a>
-    </h3>
-    <p>Published by <a href="{% url 'members:detail' story.author %}">{{ story.author }}</a> 
-        on <small>{{ story.created }}</small></p>
-    <p>{{ story.description }}</p>
-    <p>category: 
-		<a href="{% url 'stories:category' story.category %}">
-			{{ story.category.name }}
-		</a>
-	</p>
-    <p>
-    	<a href="{% url 'stories:detail' pk=story.id slug=story.title|slugify %}">link</a>
-    	<a href="{% url 'stories:edit' story.id %}">edit</a>
-    </p>
+    </h4>        
+    <p class="card-text">{{ story.description|truncatechars:100}}</p>
+    <p class="card-text"><small>{{story.created}}</small></p>
+  </div>
+  <div class="card-footer">
+    <a href="{% url 'members:detail' story.author %}">
+        <img src="{{ story.author.thumbnail }}" alt="profile image" class="img-circle">
+        {{ story.author }}
+    </a>
+    <a href="{% url 'stories:detail' pk=story.id slug=story.title|slugify %}" 
+        class="btn btn-primary-outline pull-right">Read</a>
+  </div>
+</div>
+
 {% empty %}
     <p>No stories yet.</p>
 {% endfor %}
 </div>
+
 {% endblock %}

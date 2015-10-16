@@ -1,14 +1,29 @@
 {% extends 'base.html' %}
 
+{% block landing %}
+<div class="bg-inverse m-t-lg p-a-lg">
+    <div class="container">
+        <h1>{{ story.title }}</h1>
+        <a href="{% url 'members:detail' story.author %}">
+	        <img src="{{ story.author.thumbnail }}" alt="profile image" class="img-circle">
+	        {{ story.author }}
+	    </a>
+    </div>
+</div>
+{% endblock %}
+
 {% block content %}
-<h3>{{ story.title }}</h3>
-<p>Published by <a href="{% url 'members:detail' story.author %}">{{ story.author }}</a> 
-        on <small>{{ story.created }}</small></p>
-<p>{{ story.description }}</p>
-<p>category: 
-	<a href="{% url 'stories:category' story.category.name %}">
-		{{ story.category }}
-	</a>
-</p>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<p>Published on <small>{{ story.created }}</small></p>
+		<p>{{ story.description }}</p>
+		<p>
+			<a href="{% url 'stories:category' story.category.name %}" class="btn btn-info-outline btn-sm">
+				{{ story.category }}
+			</a>
+		</p>
+		
+	</div>
+</div>
 <a href="{% url 'stories:edit' story.id %}">edit</a>
 {% endblock %}

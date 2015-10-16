@@ -11,6 +11,14 @@ class Member(models.Model):
     def __str__(self):
         return self.user.username
 
+    def avatar(self):
+        api = "http://api.adorable.io/avatars/96/{}@adorable.io.png"
+        return api.format(self)
+
+    def thumbnail(self):
+        api = "http://api.adorable.io/avatars/32/{}@adorable.io.png"
+        return api.format(self)
+
 
 @receiver(post_save, sender=User)
 def handle_user_save(sender, instance, created, **kwargs):

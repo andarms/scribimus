@@ -1,29 +1,44 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<h2>{{ profile }} Stories</h2>
-<a href="{% url 'stories:create' %}">Create</a>
-<div>	
-{% for story in stories %}
-    <h3>
-        <a href="{% url 'stories:detail' pk=story.id slug=story.title|slugify %}">
-            {{ story.title|slugify }}
-        </a>
-    </h3>
-    <p>Published by <a href="{% url 'members:detail' story.author %}">{{ story.author }}</a> 
-        on <small>{{ story.created }}</small></p>
-    <p>{{ story.description }}</p>
-    <p>category: 
-		<a href="{% url 'stories:category' story.category.name %}">
-			{{ story.category.name }}
-		</a>
-	</p>
-    <p>
-    	<a href="{% url 'stories:detail' pk=story.id slug=story.title|slugify %}">
-    	<a href="{% url 'stories:edit' story.id %}">edit</a>
-    </p>
-{% empty %}
-    <p>No stories yet.</p>
-{% endfor %}
+{% block landing %}
+<div class="bg-inverse m-t-lg p-a-lg">
+    <div class="container">
+        <img src="{{profile.member.avatar}}" alt="..." class="img-circle pull-left">
+        <div class="profile-info m-l pull-left">
+            <h1>{{ profile }}</h1>
+            <span>{{ profile.email }}</span>
+        </div>
+    </div>
 </div>
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'stories:create' %}" class="btn btn-success pull-right">
+        <i class="fa fa-plus"></i> Create new story
+    </a>
+    <div class="card-columns clearfix">   
+    {% for story in stories %}
+        <div class="card">
+           <div class="card-block">
+            <h4 class="card-title">
+                <a href="{% url 'stories:detail' pk=story.id slug=story.title|slugify %}">
+                    {{ story.title }}
+                </a>
+            </h4>        
+            <p class="card-text">{{ story.description|truncatechars:100}}</p>
+            <p class="card-text"><small>{{story.created}}</small></p>
+          </div>
+          <div class="card-footer">
+            <a href="{% url 'members:detail' story.author %}">
+                <img src="{{ story.author.thumbnail }}" alt="profile image" class="img-circle">
+                {{ story.author }}
+            </a>
+            <a href="{% url 'stories:detail' pk=story.id slug=story.title|slugify %}" 
+                class="btn btn-primary-outline pull-right">Read</a>
+          </div>
+        </div>
+    {% empty %}
+        <p>No stories yet.</p>
+    {% endfor %}
+    </div>
 {% endblock %}
